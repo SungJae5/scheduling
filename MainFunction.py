@@ -15,11 +15,18 @@ list1 = []
 list1.append(result.iloc[0,0:2].values[1])
 print(list1)'''
 
+
+'''find the NameEntry from the list of dataset'''
 def load_name_list(nameentry):
     namelist=[]
     names = pd.read_sql_query(f"SELECT * FROM test_list WHERE Name Like '{nameentry}%' ",engine)
     namelist.append(names.iloc[0,0:2].values[1])
     return namelist
+
+'''load the STUDENT SCHEDULE FROM LIST'''
+def load_student_schedule(Nameentry):
+    schedules = pd.read_sql_query(f"SELECT * FROM list WEHRE name = {Nameentry}", engine) 
+    return schedules
 
 '''SLpath = '/Users/oseongjae/PythonProject/NewProject/StudentList.xlsx'
 AVpath = '/Users/oseongjae/PythonProject/NewProject/Availability.xlsx'

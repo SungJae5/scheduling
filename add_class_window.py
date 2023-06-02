@@ -1,5 +1,5 @@
-import customtkinter as tk
 from tkinter import *
+import customtkinter as tk
 from sqlalchemy import engine
 from MainFunction import add_schedule
 import pandas as pd
@@ -28,10 +28,12 @@ SmallFont = ('Arial', 18, 'bold')
 
 
 ###
+#Function for Refresh Checkbox - setting to 0
 def checkbox_refresh():
-    for v in checkbtn_var_list:
-        v = 0
+    for cbtn in checkbutton_list:
+        cbtn.set(0)
 
+#SUBMIT THE SCHEDULE IN
 def submit_clicked():
     days_dict = {'Monday' : var_M,
     'Tuesday' : var_T,
@@ -74,6 +76,14 @@ checkbutton_5.pack()
 checkbutton_6.pack()
 checkbutton_7.pack()
 
+checkbutton_list = [checkbutton_1,
+checkbutton_2,
+checkbutton_3,
+checkbutton_4,
+checkbutton_5,
+checkbutton_6,
+checkbutton_7]
+
 checkbtn_var_list = [var_M,
 var_T ,
 var_W ,
@@ -81,6 +91,9 @@ var_TH ,
 var_F ,
 var_Sat ,
 var_Sun]
+
+
+
 
 #Dropdown
 options = ['7:00','8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00']			
@@ -112,8 +125,6 @@ student_name = 'Student1'
 
 df_label = Label(window, text=f'CURRENT DATA: \n{schedule_df}')
 df_label.pack()
-
-
 
 
 window.resizable(True, True)
