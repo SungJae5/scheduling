@@ -1,0 +1,21 @@
+
+STUDENT
+    ETAID CHAR PRIMARY KEY
+    FristName CHAR
+    LastName CHAR
+    DisplayName CHAR
+    INSTRUCTOR FOREIGN KEY 
+    Course CHAR
+    Availability FOREIGN KEY 
+
+INSTRUCTOR
+    DisplayName PRIMARY KEY
+    Seminole Boolean
+    Intermediate Boolean
+    Eoc Boolean
+
+Availability
+    ID INT AUTO-INCRE IDENTIFY
+    Eventday CHAR
+    StartTime Datetime
+    EndTime Datetime
