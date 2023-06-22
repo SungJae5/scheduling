@@ -13,15 +13,17 @@ class Availability:
 
 def create_data(input_file):
     '''
-    Last Name, First Name	
-    ETA ID	
-    Display Name	
-    Person Subtype	
-    Course	
-    Class	
-    Team	
-    Instructor	Status
-'''
+    Last Name, First Name	O
+    ETA ID	P
+    Display Name	Q
+    Person Subtype	 R
+    Course	S
+    Class	T
+    Team	U
+    Instructor	V
+    Status W
+    '''
+
     output_file = "output.csv"
     # Define columns that wants to retreived
     col_letters = ['O','P','Q','S','V']
@@ -31,7 +33,7 @@ def create_data(input_file):
 
     # Create a new workbook for the output file
     output_df = df.iloc[:, columns]
-    output_df = output_df.drop_duplicates()
+    output_df = output_df.drop_duplicates(keep='first')
 
     # File format control
     if output_file.endswith('.csv'):
@@ -56,10 +58,10 @@ def add_availability(data, owner_id, event_day, start_t, end_t):
     output_df.to_excel(now+"updated_availability.xlsx")
 
 def add_many_avb(data, avb_dict:dict):
-    '''function avb_dict ={  owner_id: owner's eta_id (unique value),
-                    event_day: occruing day (str),
-                    start_t: start time (str),
-                    end_t: end time (str) }'''
+    '''function avb_dict ={ owner_id: owner's eta_id (unique value),
+                            event_day: occruing day (str),
+                            start_t: start time (str),
+                            end_t: end time (str) }'''
     
     output_df = pd.read_excel(data)
     output_df.append(avb_dict, ignore_index=True)
