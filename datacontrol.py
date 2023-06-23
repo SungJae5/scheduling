@@ -11,7 +11,22 @@ class Availability:
         self.end_t = datetime.datetime.strptime(end_t, '%H:%M')
 
 
-def create_data(input_file):
+def filter_dataframe(targetdata:pd.DataFrame, target_col, target_val, filter_col:list) -> pd.DataFrame:
+    filtered_df = targetdata[targetdata[target_col] == target_val]
+    if filter_col is not None:
+        result_df = filtered_df[filter_col]
+    else:
+        result_df = filtered_df
+    return result_df
+
+def load_teams_data_to_list(input_file) -> list:
+    df = pd.read_excel(input_file)
+    result = [i for i in df['teams']]
+    return result
+
+
+
+def create_data_from_csv(input_file):
     '''
     Last Name, First Name	O
     ETA ID	P
@@ -45,6 +60,7 @@ def create_data(input_file):
 
     return output_df
 
+
 def create_instructor_list(input_file_path) -> pd.DataFrame:
     df = pd.read_excel(input_file_path)
     return df
@@ -57,7 +73,7 @@ def add_availability(data, owner_id, event_day, start_t, end_t):
     now = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
     output_df.to_excel(now+"updated_availability.xlsx")
 
-def add_many_avb(data, avb_dict:dict):
+def add_many_avb(data, avb_dict:dict) -> pd.DataFrame:
     '''function avb_dict ={ owner_id: owner's eta_id (unique value),
                             event_day: occruing day (str),
                             start_t: start time (str),
@@ -66,47 +82,16 @@ def add_many_avb(data, avb_dict:dict):
     output_df = pd.read_excel(data)
     output_df.append(avb_dict, ignore_index=True)
 
+    return output_df
+
+def save_avbdata_to_excel(data) -> None:
     now = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
-    output_df.to_excel(now+"updated_availability.xlsx")
+    data.to_excel(now+"updated_availability.xlsx")
 
-
-# Connect to the database
-conn = sqlite3.connect('mydatabase.db')
-cursor = conn.cursor()
-
-# Create the STUDENT table
-cursor.execute(''' 
-CREATE TABLE IF NOT SEXISTS STUDENT (
-eta_id TEXT PRIMARY KEY,
-name TEXT
-display_name TEXT
-instructor_id INTEGER,
-FOREIGN KEY (instructor_id) REFERENCE INSTRUCTOR (instructor_id)
-)''')
-               
-# Create the INSTRUCTOR table
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS INSTRUCTOR (
-        instructor_id INTEGER PRIMARY KEY,
-        name TEXT,
-        display_name PRIMARY KEY,
-        seminole_check Boolean,
-        intermediate_check Boolean,
-        eoc_check Boolean
-    )
-''')
-               
-# Create the AVAILABILITY table
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS AVAILABILITY (
-        availability_id INTEGER PRIMARY KEY,
-        event_day TEXT,
-        start_time TEXT,
-        end_time TEXT,
-        eta_id INTEGER,
-        FOREIGN KEY (eta_id) REFERENCES STUDENT (eta_id)
-    )
-''')
+def select_target(avb_data:pd.DataFrame, eta_id) -> pd.DataFrame:
+    filtered_df = avb_data[avb_data['owner_id'] == eta_id]
+    output_df = filtered_df['id','start_t','end_t']
+    return output_df
 
 
 
