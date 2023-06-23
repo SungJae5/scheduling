@@ -26,8 +26,9 @@ def load_teams_data_to_list(input_file) -> list:
 
 
 
-def create_data_from_csv(input_file):
+def create_data_from_csv(input_file)->pd.DataFrame:
     '''
+    input data needs to be csv file
     Last Name, First Name	O
     ETA ID	P
     Display Name	Q
@@ -43,23 +44,30 @@ def create_data_from_csv(input_file):
     # Define columns that wants to retreived
     col_letters = ['O','P','Q','S','V']
     columns = [l.column_index_from_string for l in col_letters]
+    headings = ['Name',
+    'ETA ID',
+    'Display Name',
+    'Course',
+    'Team',
+    'Instructor']
     # Load the input Excel file
     df = pd.read_csv(input_file)
+
 
     # Create a new workbook for the output file
     output_df = df.iloc[:, columns]
     output_df = output_df.drop_duplicates(keep='first')
+    result_df = pd.DataFrame(output_df, columns=headings)
 
     # File format control
     if output_file.endswith('.csv'):
-        output_df.to_csv(output_file, index=False)
+        result_df.to_csv(result_df, index=False)
     elif output_file.endswith('.xlsx'):
-        output_df.to_excel(output_file, index=False)
+        result_df.to_excel(result_df, index=False)
     else:
         raise ValueError("Output file format not supported.")
 
-    return output_df
-
+    return result_df
 
 def create_instructor_list(input_file_path) -> pd.DataFrame:
     df = pd.read_excel(input_file_path)

@@ -25,7 +25,9 @@ class MainWindow(tk.Tk):
         self.grid_rowconfigure(2, weight= 0)
         self.grid_rowconfigure(3, weight= 0)
         self.grid_rowconfigure(4, weight= 0)
-
+        
+        #load main data
+        maindata = datacontrol.create_data_from_csv('input.csv')
 
         #Entry Frame
         self.frame1 = tk.Frame(self)
@@ -42,6 +44,6 @@ class MainWindow(tk.Tk):
         dropdown1.pack(self.frame1)
 
         #SEARCH STUDENT Widgets
-        student_list_df = datacontrol.load_
+        student_list_df = datacontrol.filter_dataframe(maindata,'Team',selected_team,['']))
         label2= tk.Label(self.frame1, text='STUDENT LIST')
         tree1 = self.tree()
