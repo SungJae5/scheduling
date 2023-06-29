@@ -26,7 +26,7 @@ class ClassWindow(tk.CTk):
         self.grid_rowconfigure(4, weight= 0)
         self.grid_rowconfigure(5, weight= 0)
         self.grid_rowconfigure(6, weight= 0)
-
+    
         self.df_label = Label(self, text=f'CURRENT AVAILABILITY: \n{datacontrol.select_target(schedule_df,student_id)}')
         self.df_label.grid(row=1, column=0)
 

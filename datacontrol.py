@@ -101,5 +101,8 @@ def select_target(avb_data:pd.DataFrame, eta_id) -> pd.DataFrame:
     output_df = filtered_df['id','start_t','end_t']
     return output_df
 
+def convert_df_to_list(data: pd.DataFrame) -> list:
+    result = data.values.tolist()
+    return result
 
 

@@ -6,6 +6,7 @@ from functions import *
 from sqlalchemy import engine
 import MainFunction
 import datacontrol
+import pandas as pd
 
 class MainWindow(tk.Tk):
     def __init__(self):
@@ -44,6 +45,27 @@ class MainWindow(tk.Tk):
         dropdown1.pack(self.frame1)
 
         #SEARCH STUDENT Widgets
-        student_list_df = datacontrol.filter_dataframe(maindata,'Team',selected_team,['']))
+        student_list_df = datacontrol.filter_dataframe(maindata,'Team',selected_team,[''])
+        s_list = datacontrol.convert_df_to_list(student_list_df)
         label2= tk.Label(self.frame1, text='STUDENT LIST')
-        tree1 = self.tree()
+        tree_cols = ('Name',
+    'ETA ID',
+    'Display Name',
+    'Course',
+    'Team',
+    'Instructor')
+        tree1 = tk.ttk.Treeview (self.frame1, columns = tree_cols, show='headings')
+        tree1.heading('Name', text='Name')
+        tree1.heading('ETA ID', text='ETA ID')
+        tree1.heading('Display Name', text='Display Name')
+        tree1.heading('Course', text='Course')
+        tree1.heading('Team', text='Team')
+        tree1.heading('Instructor', text='Instructor')
+        for s in s_list:
+            tree1.insert('','end',values=s)
+        def item_selected(event):
+            for selected_item in tree1.selection():
+                item = tree1.item(selected_item)
+                record = item['values']
+                tk.showinfo(title='Information',message=','.join(record))
+        tree1.bind('<<TreeviewSelect>>', item_selected)
