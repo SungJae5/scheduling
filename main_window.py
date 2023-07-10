@@ -63,9 +63,22 @@ class MainWindow(tk.Tk):
         tree1.heading('Instructor', text='Instructor')
         for s in s_list:
             tree1.insert('','end',values=s)
-        def item_selected(event):
+        def item_selected(event): #TODO: See if this works
             for selected_item in tree1.selection():
                 item = tree1.item(selected_item)
                 record = item['values']
                 tk.showinfo(title='Information',message=','.join(record))
         tree1.bind('<<TreeviewSelect>>', item_selected)
+
+        #TODO: TREEVIEW NEEDS TO BE DYNAMICALLY chagned
+
+        # Edit Button
+        def OpenEditWindow(event): #TODO: define the fuction open the new window for editting
+            pass
+        edit_btn = tk.Button(self, text='Edit', Command=OpenEditWindow)
+        edit_btn.grid(row=3, column=4) # TODO: CHECK THE GRID R,C
+
+
+
+        
+        
