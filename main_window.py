@@ -1,17 +1,13 @@
 from cgitb import small
-from tkinter import messagebox
-from turtle import bgcolor
 import tkinter as tk
-from functions import *
+import tkinter.ttk as ttk
 from sqlalchemy import engine
-import MainFunction
 import datacontrol
 import pandas as pd
 
 class MainWindow(tk.Tk):
     def __init__(self):
-        tk.__init__(self)
-        self.title("MAIN WINDOW")
+        self.wm_title("MAIN WINDOW")
         self.geometry('800x600')
         self.configure(bg='gray')
         SmallFont = ('Arial', 18, 'bold')
@@ -54,7 +50,7 @@ class MainWindow(tk.Tk):
     'Course',
     'Team',
     'Instructor')
-        tree1 = tk.ttk.Treeview (self.frame1, columns = tree_cols, show='headings')
+        tree1 = ttk.Treeview (self.frame1, columns = tree_cols, show='headings')
         tree1.heading('Name', text='Name')
         tree1.heading('ETA ID', text='ETA ID')
         tree1.heading('Display Name', text='Display Name')
@@ -80,5 +76,5 @@ class MainWindow(tk.Tk):
 
 
 
-        
+
         
