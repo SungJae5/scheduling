@@ -1,23 +1,64 @@
 import tkinter as tk
+import tkinter.ttk as ttk
 
 class Edit_window():
   def __init__(self):
-      tk.__init__(self)
-      self.title("EDIT WINDOW")
-      self.geometry('800x600')
-      self.configure(bg='gray')
-      SmallFont = ('Arial', 18, 'bold')
-      # GRID 5 x 5
-      self.grid_columnconfigure(0, weight=0)
-      self.grid_columnconfigure(1, weight=0)
-      self.grid_columnconfigure(2, weight=0)
-      self.grid_columnconfigure(3, weight=0)
-      self.grid_columnconfigure(3, weight=0)
-      self.grid_rowconfigure(0, weight = 0)
-      self.grid_rowconfigure(1, weight= 0)
-      self.grid_rowconfigure(2, weight= 0)
-      self.grid_rowconfigure(3, weight= 0)
-      self.grid_rowconfigure(4, weight= 0)
+    tk.__init__(self)
+    self.title("EDIT WINDOW")
+    self.geometry('800x600')
+    self.configure(bg='gray')
+    SmallFont = ('Arial', 18, 'bold')
+
+    # GRID 5 x 5
+    self.grid_columnconfigure(0, weight=0)
+    self.grid_columnconfigure(1, weight=0)
+    self.grid_columnconfigure(2, weight=0)
+    self.grid_columnconfigure(3, weight=0)
+    self.grid_columnconfigure(3, weight=0)
+    self.grid_rowconfigure(0, weight = 0)
+    self.grid_rowconfigure(1, weight= 0)
+    self.grid_rowconfigure(2, weight= 0)
+    self.grid_rowconfigure(3, weight= 0)
+    self.grid_rowconfigure(4, weight= 0)
+    
+    #Checkbox configuration
+    self.var_M= tk.IntVar()
+    self.var_T= tk.IntVar()
+    self.var_W= tk.IntVar()
+    self.var_Th= tk.IntVar()
+    self.var_F= tk.IntVar()
+    self.var_Sa= tk.IntVar()
+    self.var_Su= tk.IntVar()
+
+    checkbutton_1 = tk.Checkbutton(self, borderwidth = 10, text='M',variable=self.var_M, onvalue=1, offvalue=0)
+    checkbutton_2 = tk.Checkbutton(self, borderwidth = 10, text='T',variable=self.var_T, onvalue=1, offvalue=0)
+    checkbutton_3 = tk.Checkbutton(self, borderwidth = 10, text='W',variable=self.var_W, onvalue=1, offvalue=0)
+    checkbutton_4 = tk.Checkbutton(self, borderwidth = 10, text='Th',variable=self.var_Th, onvalue=1, offvalue=0)
+    checkbutton_5 = tk.Checkbutton(self, borderwidth = 10, text='F',variable=self.var_F, onvalue=1, offvalue=0)
+    checkbutton_6 = tk.Checkbutton(self, borderwidth = 10, text='Sat',variable=self.var_Sa, onvalue=1, offvalue=0)
+    checkbutton_7 = tk.Checkbutton(self, borderwidth = 10, text='Sun',variable=self.var_Su, onvalue=1, offvalue=0)
+
+    checkbutton_list = [checkbutton_1,
+                        checkbutton_2,
+                        checkbutton_3,
+                        checkbutton_4,
+                        checkbutton_5,
+                        checkbutton_6,
+                        checkbutton_7]
+
+    checkbtn_var_list = [self.var_M,
+                        self.var_T ,
+                        self.var_W ,
+                        self.var_Th ,
+                        self.var_F ,
+                        self.var_Sa,
+                        self.var_Su]
+
+    #Dropdown Configuration
+    options = ['7:00','8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00']			
+    start_clicked = tk.StringVar(self)
+    end_clicked = tk.StringVar(self)
+
     #STUDENT'S Availability as DataFrame View?
 
 
